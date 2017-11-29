@@ -16,9 +16,6 @@ import java.util.HashMap;
 
 public class Competitionutils extends NetworkUtils {
 
-    private static final String API_URL = "http://api.football-data.org";
-
-
     public URL buildUrl(String code){
         Uri builtUri = Uri.parse(API_URL).buildUpon()
                 .appendPath("v1")

@@ -17,6 +17,7 @@ public abstract class NetworkUtils {
 
     protected static final String API_KEY = "ceb26da2cb3f4f3ba5da6036c44325b3";
     protected static final String TAG = "JAMES";
+    protected static final String API_URL = "http://api.football-data.org";
 
     public String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
