@@ -3,6 +3,8 @@ package com.example.android.footyapp.network;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.footyapp.models.Team;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,9 +37,9 @@ public class TeamUtils extends NetworkUtils {
     }
 
 
-    public HashMap<String,String> getResponseFromJson(String response, String team){
+    public HashMap<String,Team> getResponseFromJson(String response, String team){
 
-       HashMap<String,String> competitionMap = new HashMap<String, String>();
+       HashMap<String,Team> competitionMap = new HashMap<String, Team>();
         try{
             JSONObject jsonObj = new JSONObject(response);
             JSONArray standings = jsonObj.getJSONArray("standing");
@@ -45,29 +47,17 @@ public class TeamUtils extends NetworkUtils {
 
                 JSONObject row = standings.getJSONObject(j);
                 if( row.getString("teamName") == team) {
-                    competitionMap.put("teamName", row.getString("teamName"));
-                    competitionMap.put("crestURI", row.getString("crestURI"));
-                    competitionMap.put("playedGames", row.getString("playedGames"));
-                    competitionMap.put("points", row.getString("points"));
-                    competitionMap.put("wins", row.getString("wins"));
-                    competitionMap.put("draws", row.getString("draws"));
-                    competitionMap.put("losses", row.getString("losses"));
-                    competitionMap.put("goals", row.getString("goals"));
-                    competitionMap.put("goalsAgainst", row.getString("goalsAgainst"));
-                    competitionMap.put("goalDifference", row.getString("goalDifference"));
-                    competitionMap.put("position", row.getString("position"));
+
                     JSONObject homeObj = row.getJSONObject("home");
-                    competitionMap.put("homeGoals", homeObj.getString("goals"));
-                    competitionMap.put("homeGoalsAgainst", homeObj.getString("goalsAgainst"));
-                    competitionMap.put("homeWins", homeObj.getString("wins"));
-                    competitionMap.put("homeDraws", homeObj.getString("draws"));
-                    competitionMap.put("homeLosses", homeObj.getString("losses"));
                     JSONObject awayObj = row.getJSONObject("away");
-                    competitionMap.put("awayGoals", awayObj.getString("goals"));
-                    competitionMap.put("awayGoalsAgainst", awayObj.getString("goalsAgainst"));
-                    competitionMap.put("awayWins", awayObj.getString("wins"));
-                    competitionMap.put("awayDraws", awayObj.getString("draws"));
-                    competitionMap.put("awayLosses", awayObj.getString("losses"));
+                    Team teamObj = new Team(row.getString("teamName"), row.getString("crestURI"),  row.getString("playedGames"), row.getString("points"),  row.getString("wins"),
+                            row.getString("draws"),row.getString("losses"),row.getString("goals"),row.getString("goalsAgainst"),
+                            row.getString("goalDifference"),row.getString("position"), homeObj.getString("goals"),homeObj.getString("goalsAgainst"),
+                            homeObj.getString("wins"),homeObj.getString("draws"),homeObj.getString("losses"),awayObj.getString("goals"),
+                            awayObj.getString("goalsAgainst"),awayObj.getString("wins"),awayObj.getString("draws"),awayObj.getString("losses"));
+
+                    competitionMap.put("team", teamObj);
+
                 }
 
             }

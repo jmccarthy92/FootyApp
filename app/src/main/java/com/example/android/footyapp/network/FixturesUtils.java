@@ -3,6 +3,8 @@ package com.example.android.footyapp.network;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.footyapp.models.Fixtures;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,24 +37,21 @@ public class FixturesUtils extends NetworkUtils {
     }
 
 
-    public ArrayList<HashMap<String,String>> getResponseFromJson(String response){
+    public ArrayList<HashMap<String,Fixtures>> getResponseFromJson(String response){
 
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String,Fixtures>> list = new ArrayList<HashMap<String, Fixtures>>();
         try{
             JSONObject jsonObj = new JSONObject(response);
             JSONArray fixtures = jsonObj.getJSONArray("fixtures");
             for(int j = 0; j < fixtures.length(); j++){
-                HashMap<String, String> competitionMap = new HashMap<String,String>();
+                HashMap<String, Fixtures> competitionMap = new HashMap<String,Fixtures>();
                 JSONObject row = fixtures.getJSONObject(j);
-                competitionMap.put("date",row.getString("date"));
-                competitionMap.put("status",row.getString("status"));
-                competitionMap.put("matchday",row.getString("matchday"));
-                competitionMap.put("homeTeamName",row.getString("homeTeamName"));
-                competitionMap.put("awayTeamName",row.getString("awayTeamName"));
                 JSONObject result = row.getJSONObject("result");
-                competitionMap.put("goalsHomeTeam",result.getString("goalsHomeTeam"));
-                competitionMap.put("goalsAwayTeam",result.getString("goalsAwayTeam"));
-         list.add(j, competitionMap);
+                Fixtures fixturesObj = new Fixtures(row.getString("date"),row.getString("status"),row.getString("matchday"),
+                                                    row.getString("homeTeamName"),row.getString("awayTeamName"),
+                                                    result.getString("goalsHomeTeam"),result.getString("goalsAwayTeam"));
+                competitionMap.put("fixtures",fixturesObj);
+                list.add(j, competitionMap);
             }
 
         } catch( final JSONException je){

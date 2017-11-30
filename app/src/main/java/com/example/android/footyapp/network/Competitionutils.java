@@ -3,6 +3,8 @@ package com.example.android.footyapp.network;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.footyapp.models.Competition;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,17 +34,13 @@ public class Competitionutils extends NetworkUtils {
     }
 
 
-    public HashMap<String,String> getResponseFromJson(String response){
-        HashMap<String, String> competitionMap = new HashMap<String,String>();
+    public HashMap<String,Competition> getResponseFromJson(String response){
+        HashMap<String, Competition> competitionMap = new HashMap<String,Competition>();
         try{
             JSONObject jsonObj = new JSONObject(response);
-            competitionMap.put("id",jsonObj.getString("id"));
-            competitionMap.put("league", jsonObj.getString("caption"));
-            competitionMap.put("currentMatchday", jsonObj.getString("currentMatchday"));
-            competitionMap.put("numberOfMatchdays", jsonObj.getString("numberOfMatchdays"));
-            competitionMap.put("numberOfTeams", jsonObj.getString("numberOfTeams"));
-            competitionMap.put("numberOfGames", jsonObj.getString("numberOfGames"));
-
+            Competition competition = new Competition(jsonObj.getString("id"),jsonObj.getString("caption"),jsonObj.getString("currentMatchday"),
+                                             jsonObj.getString("numberOfMatchdays"),jsonObj.getString("numberOfTeams"),jsonObj.getString("numberOfGames"));
+            competitionMap.put("competition",competition);
 
         } catch( final JSONException je){
             Log.e(TAG, "JSON PARSING ERROR:" + je.getMessage());

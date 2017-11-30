@@ -3,6 +3,8 @@ package com.example.android.footyapp.network;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.footyapp.models.Player;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,21 +37,18 @@ public class PlayerUtils extends NetworkUtils {
     }
 
 
-    public ArrayList<HashMap<String,String>> getResponseFromJson(String response){
+    public ArrayList<HashMap<String,Player>> getResponseFromJson(String response){
 
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String,Player>> list = new ArrayList<HashMap<String, Player>>();
         try{
             JSONObject jsonObj = new JSONObject(response);
             JSONArray players = jsonObj.getJSONArray("players");
             for(int j = 0; j < players.length(); j++){
-                HashMap<String, String> competitionMap = new HashMap<String,String>();
+                HashMap<String, Player> competitionMap = new HashMap<String,Player>();
                 JSONObject row = players.getJSONObject(j);
-                competitionMap.put("name",row.getString("name"));
-                competitionMap.put("position",row.getString("position"));
-                competitionMap.put("jerseyNumber",row.getString("jerseyNumber"));
-                competitionMap.put("dateOfBirth",row.getString("dateOfBirth"));
-                competitionMap.put("nationality",row.getString("nationality"));
-                competitionMap.put("contractUntil",row.getString("contractUntil"));
+                Player player = new Player(row.getString("name"),row.getString("position"),row.getString("jerseyNumber"),
+                                          row.getString("dateOfBirth"),row.getString("nationality"),row.getString("contractUntil"));
+                competitionMap.put("player",player);
                 list.add(j, competitionMap);
             }
 

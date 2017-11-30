@@ -3,6 +3,8 @@ package com.example.android.footyapp.network;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.footyapp.models.League;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,24 +37,19 @@ public class LeagueUtils extends NetworkUtils {
     }
 
 
-    public ArrayList<HashMap<String,String>> getResponseFromJson(String response){
+    public ArrayList<HashMap<String,League>> getResponseFromJson(String response){
 
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String,League>> list = new ArrayList<HashMap<String, League>>();
         try{
             JSONObject jsonObj = new JSONObject(response);
             JSONArray standings = jsonObj.getJSONArray("standing");
             for(int j = 0; j < standings.length(); j++){
-                HashMap<String, String> competitionMap = new HashMap<String,String>();
+                HashMap<String, League> competitionMap = new HashMap<String,League>();
                 JSONObject row = standings.getJSONObject(j);
-                competitionMap.put("teamName",row.getString("teamName"));
-                competitionMap.put("crestURI",row.getString("crestURI"));
-                competitionMap.put("playedGames",row.getString("playedGames"));
-                competitionMap.put("points",row.getString("points"));
-                competitionMap.put("wins",row.getString("wins"));
-                competitionMap.put("draws",row.getString("draws"));
-                competitionMap.put("losses",row.getString("losses"));
-                competitionMap.put("goals",row.getString("goals"));
-                competitionMap.put("goalDifference",row.getString("goalDifference"));
+                League league = new League(row.getString("teamName"),row.getString("crestURI"),row.getString("playedGames"),
+                                row.getString("points"),row.getString("wins"),row.getString("draws"),row.getString("losses"),
+                                row.getString("goals"),row.getString("goalDifference"));
+                competitionMap.put("league",league);
                 list.add(j, competitionMap);
             }
 
