@@ -12,17 +12,26 @@ public class Competition {
     private String numberOfMatchdays;
     private String numberOfTeams;
     private String numberOfGames;
+    private String leagueShortened;
 
     public Competition(String id, String league, String currentMatchDay,
-                       String numberOfMatchdays, String numberOfTeams, String numberOfGames){
+                       String numberOfMatchdays, String numberOfTeams, String numberOfGames, String leagueShortened){
         this.id = id;
         this.league = league;
         this.currentMatchDay = currentMatchDay;
         this.numberOfMatchdays = numberOfMatchdays;
         this.numberOfTeams = numberOfTeams;
         this.numberOfGames = numberOfGames;
+        this.leagueShortened =leagueShortened;
     }
 
+    public String getLeagueShortened() {
+        return leagueShortened;
+    }
+
+    public void setLeagueShortened(String leagueShortened) {
+        this.leagueShortened = leagueShortened;
+    }
 
     public String getNumberOfMatchdays() {
         return numberOfMatchdays;
