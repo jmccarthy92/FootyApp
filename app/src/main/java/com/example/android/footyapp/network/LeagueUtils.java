@@ -37,20 +37,20 @@ public class LeagueUtils extends NetworkUtils {
     }
 
 
-    public ArrayList<HashMap<String,League>> getResponseFromJson(String response){
+    public ArrayList<League> getResponseFromJson(String response){
 
-        ArrayList<HashMap<String,League>> list = new ArrayList<HashMap<String, League>>();
+        ArrayList<League> list = new ArrayList<League>();
         try{
             JSONObject jsonObj = new JSONObject(response);
             JSONArray standings = jsonObj.getJSONArray("standing");
             for(int j = 0; j < standings.length(); j++){
-                HashMap<String, League> competitionMap = new HashMap<String,League>();
+
                 JSONObject row = standings.getJSONObject(j);
                 League league = new League(row.getString("teamName"),row.getString("crestURI"),row.getString("playedGames"),
                                 row.getString("points"),row.getString("wins"),row.getString("draws"),row.getString("losses"),
                                 row.getString("goals"),row.getString("goalDifference"));
-                competitionMap.put("league",league);
-                list.add(j, competitionMap);
+                Log.d("JAMES",league.toString());
+                list.add(j, league);
             }
 
         } catch( final JSONException je){

@@ -16,8 +16,23 @@ public class League {
     private String goals;
     private String goalDifference;
 
+    @Override
+    public String toString() {
+        return "League{" +
+                "teamName='" + teamName + '\'' +
+                ", crestURI='" + crestURI + '\'' +
+                ", playedGames='" + playedGames + '\'' +
+                ", points='" + points + '\'' +
+                ", wins='" + wins + '\'' +
+                ", draws='" + draws + '\'' +
+                ", losses='" + losses + '\'' +
+                ", goals='" + goals + '\'' +
+                ", goalDifference='" + goalDifference + '\'' +
+                '}';
+    }
+
     public League(String teamName, String crestURI, String playedGames, String points, String wins,
-                                String draws, String losses, String goals, String goalDifference) {
+                  String draws, String losses, String goals, String goalDifference) {
         this.teamName = teamName;
         this.crestURI = crestURI;
         this.playedGames = playedGames;

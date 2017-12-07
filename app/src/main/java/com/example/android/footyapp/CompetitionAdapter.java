@@ -30,7 +30,7 @@ public class CompetitionAdapter extends ArrayAdapter<Competition> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.competition_row, parent, false);
 
@@ -43,6 +43,7 @@ public class CompetitionAdapter extends ArrayAdapter<Competition> {
            @Override
             public void onClick(View v){
                Intent intent = new Intent(v.getContext(),LeagueActivity.class);
+               intent.putExtra("URL_CODE",competitionList.get(position).getId());
                v.getContext().startActivity(intent);
            }
         });
