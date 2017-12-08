@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
     android:id="@+id/league_row" android:clickable="true">
 
     <LinearLayout
@@ -13,86 +13,99 @@
 
         <ImageView
             android:contentDescription="Team Image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/team_table_image"
             />
 
+        <TextView
+            android:id="@+id/team_table_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:paddingLeft="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/team_table_thumbnail"
+            android:textColor="@color/black"/>
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/team_table_name"
+
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:paddingLeft="5dp"
-        android:layout_toRightOf="@+id/team_table_thumbnail"
-        android:textColor="@color/black"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="6dp"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/team_table_played_games"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/team_table_name"
+            android:textColor="@color/black"/>
 
 
-    <TextView
-        android:id="@+id/team_table_played_games"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:paddingLeft="5dp"
-        android:layout_toRightOf="@+id/team_table_name"
-        android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/team_table_wins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/team_table_played_games"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/team_table_draws"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/team_table_wins"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/team_table_losses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/team_table_draws"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/team_table_goals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/team_table_losses"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
 
 
-    <TextView
-        android:id="@+id/team_table_wins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/team_table_played_games"
-        android:textSize="12sp"
-        android:paddingLeft="5dp"
-        android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/team_table_goal_difference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/team_table_goals"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/team_table_draws"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/team_table_wins"
-        android:textSize="12sp"
-        android:paddingLeft="5dp"
-        android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/team_table_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/team_table_goal_difference"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/team_table_losses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/team_table_draws"
-        android:textSize="12sp"
-        android:paddingLeft="5dp"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/team_table_goals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/team_table_losses"
-        android:textSize="12sp"
-        android:paddingLeft="5dp"
-        android:textColor="@color/black"/>
-
-
-    <TextView
-        android:id="@+id/team_table_goal_difference"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/team_table_goals"
-        android:textSize="12sp"
-        android:paddingLeft="5dp"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/team_table_points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/team_table_goal_difference"
-        android:textSize="12sp"
-        android:paddingLeft="5dp"
-        android:textColor="@color/black"/>
+    </LinearLayout>
 
 </RelativeLayout>

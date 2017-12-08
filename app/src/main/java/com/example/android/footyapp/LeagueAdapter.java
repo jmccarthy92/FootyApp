@@ -29,17 +29,22 @@ import java.util.ArrayList;
 public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder> {
 
     private ArrayList<League> leagueData;
-    private int leagueLayout;
 
-    public LeagueAdapter(ArrayList<League> leagueData, int leagueLayout){
+
+    public LeagueAdapter(ArrayList<League> leagueData){
         this.leagueData = leagueData;
-        this.leagueLayout = leagueLayout;
+        Log.d("JAMES", leagueData.toString());
 
     }
 
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView){
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
     public class LeagueViewHolder extends RecyclerView.ViewHolder {
-        public final ImageView teamCrest;
-        public final TextView teamName, teamPlayedGames, teamWins, teamDraws,
+        public ImageView teamCrest;
+        public TextView teamName, teamPlayedGames, teamWins, teamDraws,
                         teamLosses,teamGoals,teamGoalDifference, teamTablePoints;
 
         public LeagueViewHolder(View v){
@@ -63,7 +68,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     public LeagueViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
         Context context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(leagueLayout, viewGroup, false);
+        View view = inflater.inflate(R.layout.league_row, viewGroup, false);
         return new LeagueViewHolder(view);
     }
 
@@ -81,6 +86,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     @Override
     public void onBindViewHolder(LeagueViewHolder viewHolder, int position){
         League league = leagueData.get(position);
+        Log.d("JAMES", "MADE IT HERE FUCKER");
         HttpImageRequestTask hirTask = new HttpImageRequestTask(viewHolder.teamCrest);
         hirTask.execute(league.getCrestURI());
         viewHolder.teamName.setText(league.getTeamName());
@@ -105,8 +111,9 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
         @Override
         protected Drawable doInBackground(String... params) {
             try {
-
+                params[0] = params[0].replaceFirst("http:", "https:");
                 final URL url = new URL(params[0]);
+                Log.d("JAMESJIM", params[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = urlConnection.getInputStream();
                 SVG svg = SVGParser.getSVGFromInputStream(inputStream);

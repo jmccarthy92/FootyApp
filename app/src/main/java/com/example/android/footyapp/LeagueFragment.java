@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -124,8 +125,13 @@ public class LeagueFragment extends Fragment {
                 return;
             }
 
-            LeagueAdapter  leagueAdapter = new LeagueAdapter(leagueList, R.layout.league_row );
+            LeagueAdapter  leagueAdapter = new LeagueAdapter(leagueList);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity,
+                                                        LinearLayoutManager.VERTICAL, false);
+
             RecyclerView recyclerView = (RecyclerView) fragmentView.findViewById(R.id.recycler_view_league);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(leagueAdapter);
         }
 
