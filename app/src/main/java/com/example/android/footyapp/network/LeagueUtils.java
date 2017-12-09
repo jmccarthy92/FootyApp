@@ -20,7 +20,10 @@ import java.util.HashMap;
 
 public class LeagueUtils extends NetworkUtils {
 
+    private String code;
+
     public URL buildUrl(String code){
+        this.code = code;
         Uri builtUri = Uri.parse(API_URL).buildUpon()
                 .appendPath("v1")
                 .appendPath("competitions")
@@ -49,6 +52,7 @@ public class LeagueUtils extends NetworkUtils {
                 League league = new League(row.getString("teamName"),row.getString("crestURI"),row.getString("playedGames"),
                                 row.getString("points"),row.getString("wins"),row.getString("draws"),row.getString("losses"),
                                 row.getString("goals"),row.getString("goalDifference"));
+                league.setId(this.code);
                 Log.d("JAMES",league.toString());
                 list.add(j, league);
             }

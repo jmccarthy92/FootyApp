@@ -15,6 +15,9 @@ public class League {
     private String losses;
     private String goals;
     private String goalDifference;
+    private String id;
+
+
 
     @Override
     public String toString() {
@@ -42,6 +45,14 @@ public class League {
         this.losses = losses;
         this.goals = goals;
         this.goalDifference = goalDifference;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTeamName() {

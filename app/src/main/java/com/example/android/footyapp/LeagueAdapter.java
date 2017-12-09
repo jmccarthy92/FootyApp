@@ -6,6 +6,7 @@ package com.example.android.footyapp;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
@@ -46,10 +47,12 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
         public ImageView teamCrest;
         public TextView teamName, teamPlayedGames, teamWins, teamDraws,
                         teamLosses,teamGoals,teamGoalDifference, teamTablePoints;
+        public RelativeLayout leagueRow;
 
         public LeagueViewHolder(View v){
             super(v);
             Log.d("JAMES","MADE IT HERE");
+            leagueRow = (RelativeLayout) v.findViewById(R.id.league_row);
             teamCrest = (ImageView) v.findViewById(R.id.team_table_image);
             teamName = (TextView) v.findViewById(R.id.team_table_name);
             teamPlayedGames = (TextView) v.findViewById(R.id.team_table_played_games);
@@ -85,7 +88,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
 
     @Override
     public void onBindViewHolder(LeagueViewHolder viewHolder, int position){
-        League league = leagueData.get(position);
+        final League league = leagueData.get(position);
         Log.d("JAMES", "MADE IT HERE FUCKER");
         HttpImageRequestTask hirTask = new HttpImageRequestTask(viewHolder.teamCrest);
         hirTask.execute(league.getCrestURI());
@@ -97,6 +100,16 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
         viewHolder.teamGoals.setText(league.getGoals());
         viewHolder.teamGoalDifference.setText(league.getGoalDifference());
         viewHolder.teamTablePoints.setText(league.getPoints());
+        viewHolder.leagueRow.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(), TeamActivity.class);
+
+                intent.putExtra("URL_CODE", league.getId() );
+                v.getContext().startActivity(intent);
+            }
+        });
+
 
 
     }
