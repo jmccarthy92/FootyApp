@@ -1,14 +1,122 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="150dp"
+    android:clickable="true"
+    android:id="@+id/favorite_team_layout"
+    android:background="@color/colorPrimary"
     tools:context="com.example.android.footyapp.FavoriteTeamFragment"
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:background="#FF0"/>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/favorite_team_crest"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/favorite_team_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:layout_above="@+id/favorite_team_crest"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/favorite_team_goals_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/favorite_team_name"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="14dp"
+        android:layout_toEndOf="@+id/favorite_team_crest"
+        android:layout_toRightOf="@+id/favorite_team_crest"
+        android:text="@string/goals"
+        android:textColor="#fff"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/favorite_team_draws_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/favorite_team_goals_label"
+        android:layout_alignStart="@+id/favorite_team_goals_label"
+        android:layout_centerVertical="true"
+        android:textColor="#fff"
+        android:text="@string/draws"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/favorite_team_losses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/favorite_team_draws_label"
+        android:layout_alignStart="@+id/favorite_team_draws_label"
+        android:layout_below="@+id/favorite_team_draws_label"
+        android:textColor="#fff"
+        android:text="@string/losses"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/favorite_team_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="@string/points"
+        android:textStyle="bold"
+        android:layout_below="@+id/favorite_team_losses"
+        android:layout_alignLeft="@+id/favorite_team_losses"
+        android:layout_alignStart="@+id/favorite_team_losses" />
+
+    <TextView
+        android:id="@+id/favorite_team_goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="@string/_0"
+        android:layout_above="@+id/favorite_team_draws"
+        android:layout_toRightOf="@+id/favorite_team_name"
+        android:layout_toEndOf="@+id/favorite_team_name"
+        android:layout_marginLeft="75dp"
+        android:layout_marginStart="75dp" />
+
+    <TextView
+        android:id="@+id/favorite_team_draws"
+        android:layout_width="wrap_content"
+        android:textColor="#fff"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/favorite_team_goals"
+        android:layout_alignStart="@+id/favorite_team_goals"
+        android:layout_alignTop="@+id/favorite_team_draws_label"
+        android:text="@string/_0" />
+
+    <TextView
+        android:id="@+id/favorite_team_losses_value"
+        android:layout_width="wrap_content"
+        android:textColor="#fff"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/favorite_team_draws"
+        android:layout_alignStart="@+id/favorite_team_draws"
+        android:layout_below="@+id/favorite_team_draws"
+        android:text="@string/_0" />
+
+    <TextView
+        android:id="@+id/favorite_team_points_value"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/favorite_team_losses_value"
+        android:layout_alignStart="@+id/favorite_team_losses_value"
+        android:layout_below="@+id/favorite_team_losses_value"
+        android:text="@string/_0" />
+</RelativeLayout>

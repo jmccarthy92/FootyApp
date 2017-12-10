@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface FavoriteTeamDao {
 
-    @Query("SELECT * FROM favorite_team LIMIT 2 ")
+    @Query("SELECT * FROM favorite_team ORDER BY 1 DESC LIMIT 1")
     List<FavoriteTeam> getAll();
 
     @Insert

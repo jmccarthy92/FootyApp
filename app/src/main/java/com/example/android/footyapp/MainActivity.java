@@ -15,7 +15,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements CompetitionFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements CompetitionFragment.OnFragmentInteractionListener,
+                                                                    FavoriteTeamFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
