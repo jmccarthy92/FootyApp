@@ -3,7 +3,7 @@ package com.example.android.footyapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class TeamActivity extends AppCompatActivity {
+public class TeamActivity extends AppCompatActivity implements TeamFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

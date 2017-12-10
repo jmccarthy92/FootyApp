@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.android.footyapp.async.HttpImageRequestTask;
 import com.example.android.footyapp.models.League;
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
@@ -104,7 +105,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), TeamActivity.class);
-
+                intent.putExtra("TEAM_NAME", league.getTeamName());
                 intent.putExtra("URL_CODE", league.getId() );
                 v.getContext().startActivity(intent);
             }
@@ -114,38 +115,5 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
 
     }
 
-    private class HttpImageRequestTask extends AsyncTask<String, Void, Drawable> {
 
-        private ImageView imageView;
-
-        public HttpImageRequestTask(ImageView imageView){
-            this.imageView = imageView;
-        }
-        @Override
-        protected Drawable doInBackground(String... params) {
-            try {
-                params[0] = params[0].replaceFirst("http:", "https:");
-                final URL url = new URL(params[0]);
-                Log.d("JAMESJIM", params[0]);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = urlConnection.getInputStream();
-                SVG svg = SVGParser.getSVGFromInputStream(inputStream);
-                Drawable drawable = svg.createPictureDrawable();
-                return drawable;
-            } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Drawable drawable) {
-            if(drawable != null){
-                imageView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-                imageView.setImageDrawable(drawable);
-            }
-
-        }
-    }
 }

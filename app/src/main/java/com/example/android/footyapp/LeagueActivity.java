@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 public class LeagueActivity extends AppCompatActivity implements LeagueFragment.OnFragmentInteractionListener{
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

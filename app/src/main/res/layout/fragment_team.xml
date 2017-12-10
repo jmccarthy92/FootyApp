@@ -1,13 +1,423 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.footyapp.TeamFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/team_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_marginTop="17dp"
+        android:text="TextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/team_crest"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/team_name"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/wins_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wins"
+        android:textStyle="bold"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_below="@+id/team_crest"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/draws_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/wins_label"
+        android:layout_alignStart="@+id/wins_label"
+        android:layout_below="@+id/wins_label"
+        android:layout_marginTop="16dp"
+        android:text="@string/draws"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/losses_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/losses"
+        android:textStyle="bold"
+        android:layout_below="@+id/draws_label"
+        android:layout_alignLeft="@+id/draws_label"
+        android:layout_alignStart="@+id/draws_label" />
+
+    <TextView
+        android:id="@+id/played_games_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="@string/played_games"
+        android:textStyle="bold"
+        android:layout_below="@+id/losses_label"
+        android:layout_alignLeft="@+id/losses_label"
+        android:layout_alignStart="@+id/losses_label" />
+
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_alignBaseline="@+id/points_label"
+        android:layout_alignBottom="@+id/points_label"
+        android:layout_alignLeft="@+id/goals_against"
+        android:layout_alignStart="@+id/goals_against" />
+
+    <TextView
+        android:id="@+id/goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_02"
+        android:layout_alignBaseline="@+id/goals_label"
+        android:layout_alignBottom="@+id/goals_label"
+        android:layout_alignLeft="@+id/points"
+        android:layout_alignStart="@+id/points" />
+
+    <TextView
+        android:id="@+id/home_goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_alignBaseline="@+id/home_goals_label"
+        android:layout_alignBottom="@+id/home_goals_label"
+        android:layout_alignLeft="@+id/home_goals_against"
+        android:layout_alignStart="@+id/home_goals_against" />
+
+    <TextView
+        android:id="@+id/goal_difference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_alignBaseline="@+id/goal_difference_label"
+        android:layout_alignBottom="@+id/goal_difference_label"
+        android:layout_toEndOf="@+id/goal_difference_label"
+        android:layout_toRightOf="@+id/goal_difference_label" />
+
+    <TextView
+        android:id="@+id/home_goals_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goals"
+        android:textStyle="bold"
+        android:layout_below="@+id/home_label"
+        android:layout_alignLeft="@+id/played_games_label"
+        android:layout_alignStart="@+id/played_games_label" />
+
+    <TextView
+        android:id="@+id/goals_against"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_alignBaseline="@+id/goals_against_label"
+        android:layout_alignBottom="@+id/goals_against_label"
+        android:layout_toRightOf="@+id/goal_difference_label"
+        android:layout_toEndOf="@+id/goal_difference_label" />
+
+    <TextView
+        android:id="@+id/wins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_above="@+id/draws_label"
+        android:layout_alignLeft="@+id/draws"
+        android:layout_alignStart="@+id/draws" />
+
+    <TextView
+        android:id="@+id/draws"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_above="@+id/losses_label"
+        android:layout_alignLeft="@+id/losses"
+        android:layout_alignStart="@+id/losses" />
+
+    <TextView
+        android:id="@+id/losses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_above="@+id/played_games_label"
+        android:layout_toRightOf="@+id/home_goals_against"
+        android:layout_toEndOf="@+id/home_goals_against" />
+
+    <TextView
+        android:id="@+id/played_games"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_alignBaseline="@+id/played_games_label"
+        android:layout_alignBottom="@+id/played_games_label"
+        android:layout_alignLeft="@+id/losses"
+        android:layout_alignStart="@+id/losses" />
+
+    <TextView
+        android:id="@+id/away_goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_alignBaseline="@+id/away_goals_label"
+        android:layout_alignBottom="@+id/away_goals_label"
+        android:layout_alignLeft="@+id/goal_difference"
+        android:layout_alignStart="@+id/goal_difference" />
+
+    <TextView
+        android:id="@+id/points_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/points"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/wins"
+        android:layout_alignBottom="@+id/wins"
+        android:layout_alignLeft="@+id/away_label"
+        android:layout_alignStart="@+id/away_label" />
+
+    <TextView
+        android:id="@+id/goals_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goals:"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/draws"
+        android:layout_alignBottom="@+id/draws"
+        android:layout_alignLeft="@+id/points_label"
+        android:layout_alignStart="@+id/points_label" />
+
+    <TextView
+        android:id="@+id/away_goals_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goals:"
+        android:textStyle="bold"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/goal_difference_label"
+        android:layout_alignLeft="@+id/home_goals_against_label"
+        android:layout_alignStart="@+id/home_goals_against_label" />
+
+    <TextView
+        android:id="@+id/goals_against_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goals_against"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/losses"
+        android:layout_alignBottom="@+id/losses"
+        android:layout_alignLeft="@+id/goals_label"
+        android:layout_alignStart="@+id/goals_label" />
+
+    <TextView
+        android:id="@+id/goal_difference_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goal_difference"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/played_games"
+        android:layout_alignBottom="@+id/played_games"
+        android:layout_alignLeft="@+id/goals_against_label"
+        android:layout_alignStart="@+id/goals_against_label" />
+
+    <TextView
+        android:id="@+id/home_label"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Home"
+        android:textStyle="bold"
+        android:layout_above="@+id/away_goals"
+        android:layout_alignRight="@+id/wins_label"
+        android:layout_alignEnd="@+id/wins_label" />
+
+    <TextView
+        android:id="@+id/away_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/away"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/home_label"
+        android:layout_alignBottom="@+id/home_label"
+        android:layout_alignLeft="@+id/away_goals_label"
+        android:layout_alignStart="@+id/away_goals_label" />
+
+    <TextView
+        android:id="@+id/away_goals_again_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goals Against:"
+        android:textStyle="bold"
+        android:layout_below="@+id/home_goals"
+        android:layout_alignLeft="@+id/home_goals_label"
+        android:layout_alignStart="@+id/home_goals_label" />
+
+    <TextView
+        android:id="@+id/home_goals_against_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goals Against:"
+        android:textStyle="bold"
+        android:layout_below="@+id/away_goals"
+        android:layout_toRightOf="@+id/team_crest"
+        android:layout_toEndOf="@+id/team_crest" />
+
+    <TextView
+        android:id="@+id/home_goals_against"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_below="@+id/home_goals"
+        android:layout_alignLeft="@+id/team_crest"
+        android:layout_alignStart="@+id/team_crest" />
+
+    <TextView
+        android:id="@+id/away_goals_against"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_below="@+id/away_goals"
+        android:layout_alignLeft="@+id/away_goals"
+        android:layout_alignStart="@+id/away_goals" />
+
+    <TextView
+        android:id="@+id/home_wins_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/away_goals_again_label"
+        android:layout_alignStart="@+id/away_goals_again_label"
+        android:layout_below="@+id/away_goals_again_label"
+        android:text="Wins:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/home_wins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_below="@+id/home_goals_against"
+        android:layout_alignLeft="@+id/home_goals_against"
+        android:layout_alignStart="@+id/home_goals_against" />
+
+    <TextView
+        android:id="@+id/away_wins_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/home_wins"
+        android:layout_alignLeft="@+id/home_goals_against_label"
+        android:layout_alignStart="@+id/home_goals_against_label"
+        android:text="Wins:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/away_wins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_below="@+id/away_goals_against"
+        android:layout_alignLeft="@+id/away_draws"
+        android:layout_alignStart="@+id/away_draws" />
+
+    <TextView
+        android:id="@+id/home_draws_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/home_wins_label"
+        android:layout_alignStart="@+id/home_wins_label"
+        android:layout_below="@+id/home_wins_label"
+        android:text="Draws:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/home_draws"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_below="@+id/home_wins"
+        android:layout_alignLeft="@+id/home_wins"
+        android:layout_alignStart="@+id/home_wins" />
+
+    <TextView
+        android:id="@+id/away_draws_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Draws:"
+        android:textStyle="bold"
+        android:layout_below="@+id/away_wins_label"
+        android:layout_alignLeft="@+id/away_wins_label"
+        android:layout_alignStart="@+id/away_wins_label" />
+
+    <TextView
+        android:id="@+id/away_draws"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_above="@+id/away_losses_label"
+        android:layout_alignLeft="@+id/away_goals_against"
+        android:layout_alignStart="@+id/away_goals_against" />
+
+    <TextView
+        android:id="@+id/home_losses_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/home_draws_label"
+        android:layout_alignStart="@+id/home_draws_label"
+        android:layout_below="@+id/home_draws_label"
+        android:text="Losses:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/home_losses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_below="@+id/home_draws"
+        android:layout_alignLeft="@+id/home_draws"
+        android:layout_alignStart="@+id/home_draws" />
+
+    <TextView
+        android:id="@+id/away_losses_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/away_goals_label"
+        android:layout_alignStart="@+id/away_goals_label"
+        android:layout_below="@+id/away_draws_label"
+        android:text="Losses:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/away_losses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:layout_below="@+id/away_draws"
+        android:layout_alignLeft="@+id/away_draws"
+        android:layout_alignStart="@+id/away_draws" />
+
+    <Button
+        android:id="@+id/favorite_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/away_losses_label"
+        android:layout_marginTop="16dp"
+        android:textSize="12sp"
+        android:layout_toEndOf="@+id/played_games"
+        android:layout_toRightOf="@+id/played_games"
+        android:text="@string/favourite" />
+
+</RelativeLayout>

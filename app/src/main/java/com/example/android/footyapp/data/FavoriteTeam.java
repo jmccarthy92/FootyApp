@@ -16,6 +16,9 @@ public class FavoriteTeam {
     @ColumnInfo(name = "team_code")
     private String teamCode;
 
+    @ColumnInfo(name = "team_name")
+    private String teamName;
+
     public int getUid() {
         return uid;
     }
@@ -30,5 +33,13 @@ public class FavoriteTeam {
 
     public void setTeamCode(String teamCode) {
         this.teamCode = teamCode;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 }

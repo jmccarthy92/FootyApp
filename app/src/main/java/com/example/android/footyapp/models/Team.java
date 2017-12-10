@@ -7,6 +7,8 @@ package com.example.android.footyapp.models;
 public class Team {
 
     private String teamName;
+
+    private String teamId;
     private String crestURI;
     private String playedGames;
     private String points;
@@ -221,5 +223,13 @@ public class Team {
 
     public void setAwayLosses(String awayLosses) {
         this.awayLosses = awayLosses;
+    }
+
+    public String getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
     }
 }
