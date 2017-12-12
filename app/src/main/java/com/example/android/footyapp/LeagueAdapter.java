@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.footyapp.async.HttpImageRequestTask;
+import com.example.android.footyapp.helper.ImageResourceWorker;
 import com.example.android.footyapp.models.League;
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
@@ -35,7 +36,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
 
     public LeagueAdapter(ArrayList<League> leagueData){
         this.leagueData = leagueData;
-        Log.d("JAMES", leagueData.toString());
+        //Log.d("JAMES", leagueData.toString());
 
     }
 
@@ -47,13 +48,14 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     public class LeagueViewHolder extends RecyclerView.ViewHolder {
         public ImageView teamCrest;
         public TextView teamName, teamPlayedGames, teamWins, teamDraws,
-                        teamLosses,teamGoals,teamGoalDifference, teamTablePoints;
+                        teamLosses,teamGoals,teamGoalDifference, teamTablePoints, teamRank;
         public RelativeLayout leagueRow;
 
         public LeagueViewHolder(View v){
             super(v);
             Log.d("JAMES","MADE IT HERE");
             leagueRow = (RelativeLayout) v.findViewById(R.id.league_row);
+            teamRank = (TextView) v.findViewById(R.id.team_rank);
             teamCrest = (ImageView) v.findViewById(R.id.team_table_image);
             teamName = (TextView) v.findViewById(R.id.team_table_name);
             teamPlayedGames = (TextView) v.findViewById(R.id.team_table_played_games);
@@ -91,8 +93,14 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     public void onBindViewHolder(LeagueViewHolder viewHolder, int position){
         final League league = leagueData.get(position);
         Log.d("JAMES", "MADE IT HERE FUCKER");
-        HttpImageRequestTask hirTask = new HttpImageRequestTask(viewHolder.teamCrest);
-        hirTask.execute(league.getCrestURI());
+        if(ImageResourceWorker.isBrokenSVG_Crest(league.getCrestURI())){
+            ImageResourceWorker.renderCrestImage(viewHolder.teamCrest, league.getCrestURI());
+        } else {
+            HttpImageRequestTask hirTask = new HttpImageRequestTask(viewHolder.teamCrest);
+            hirTask.execute(league.getCrestURI());
+        }
+
+        viewHolder.teamRank.setText(String.valueOf(position + 1));
         viewHolder.teamName.setText(league.getTeamName());
         viewHolder.teamPlayedGames.setText(league.getPlayedGames());
         viewHolder.teamWins.setText(league.getWins());

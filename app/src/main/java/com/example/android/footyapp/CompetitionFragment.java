@@ -2,6 +2,7 @@ package com.example.android.footyapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,7 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.example.android.footyapp.models.Competition;
 import com.example.android.footyapp.network.Competitionutils;
@@ -31,6 +35,7 @@ public class CompetitionFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("JAMMY", "oh my lord");
         super.onCreate(savedInstanceState);
 
 
@@ -50,6 +55,30 @@ public class CompetitionFragment extends Fragment {
         super.onStart();
 
     }
+
+//    public void onConfigurationChanged(Configuration config){
+//        super.onConfigurationChanged(config);
+//        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View newView = inflater.inflate(R.layout.fragment_competition, null);
+//        ViewGroup rootView  = (ViewGroup) getView();
+//        Log.d("JAMMY", "orientation" + String.valueOf(config.orientation) + " " + String.valueOf(Configuration.ORIENTATION_LANDSCAPE));
+//        ImageView competitionCrest = (ImageView) getView().findViewById(R.id.league_image);
+//        ViewGroup.LayoutParams params = competitionCrest.getLayoutParams();
+//        rootView.removeAllViews();
+//        if(config.orientation == Configuration.ORIENTATION_LANDSCAPE){
+//            Log.d("JAMMY", "YO YO");
+//            competitionCrest.requestLayout();
+//            competitionCrest.getLayoutParams().height = 50;
+//            competitionCrest.getLayoutParams().width = 50;
+//
+//        } else if (config.orientation == Configuration.ORIENTATION_PORTRAIT){
+//            competitionCrest.requestLayout();
+//            competitionCrest.getLayoutParams().height = 90;
+//            competitionCrest.getLayoutParams().width = 90;
+//        }
+//        rootView.addView(newView);
+//
+//    }
 
 
     @Override

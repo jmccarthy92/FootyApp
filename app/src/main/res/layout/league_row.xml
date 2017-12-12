@@ -4,10 +4,29 @@
     android:id="@+id/league_row" android:clickable="true">
 
     <LinearLayout
-        android:id="@+id/team_table_thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:id="@+id/team_rank_wrapper"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/team_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:padding="3dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/team_table_thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/team_rank_wrapper"
         android:layout_marginRight="5dp"
         android:padding="3dp">
 
@@ -24,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="13sp"
+            android:textSize="12sp"
             android:paddingLeft="5dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/team_table_thumbnail"
@@ -46,7 +65,7 @@
             android:id="@+id/team_table_played_games"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:padding="8dp"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/team_table_name"
@@ -58,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/team_table_played_games"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:padding="8dp"
             android:textColor="@color/black"/>
 
@@ -67,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/team_table_wins"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:padding="8dp"
             android:textColor="@color/black"/>
 
@@ -76,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/team_table_draws"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:padding="8dp"
             android:textColor="@color/black"/>
 
@@ -85,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/team_table_losses"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:padding="8dp"
             android:textColor="@color/black"/>
 
@@ -95,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/team_table_goals"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:padding="8dp"
             android:textColor="@color/black"/>
 
@@ -104,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/team_table_goal_difference"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:padding="8dp"
             android:textColor="@color/black"/>
 

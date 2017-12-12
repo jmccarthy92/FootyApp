@@ -21,6 +21,7 @@ public abstract class NetworkUtils {
 
     public String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestProperty("X-Auth-Token", API_KEY);
         try {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             String response = convertStreamToString(in);

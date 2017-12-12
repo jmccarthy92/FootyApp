@@ -3,6 +3,8 @@ package com.example.android.footyapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import com.example.android.footyapp.async.HttpImageRequestTask;
 import com.example.android.footyapp.data.AppDatabase;
 import com.example.android.footyapp.data.DBWorker;
 import com.example.android.footyapp.data.FavoriteTeam;
+import com.example.android.footyapp.helper.ImageResourceWorker;
 import com.example.android.footyapp.models.Team;
 import com.example.android.footyapp.network.TeamUtils;
 
@@ -74,10 +77,32 @@ public class FavoriteTeamFragment extends Fragment {
         }
     }
 
+//    public void onConfigurationChanged(Configuration config){
+//        super.onConfigurationChanged(config);
+//        RelativeLayout favoriteTeamWrapper = (RelativeLayout) getView().findViewById(R.id.favorite_team_layout);
+//        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) favoriteTeamWrapper.getLayoutParams();
+//        ImageView competitionCrest = (ImageView) getView().findViewById(R.id.league_image);
+//        if(config.orientation == Configuration.ORIENTATION_LANDSCAPE){
+//            lp.height=100;
+//
+//        } else if (config.orientation == Configuration.ORIENTATION_PORTRAIT){
+//            lp.height=150;
+//        }
+//        favoriteTeamWrapper.setLayoutParams(lp);
+//    }
+
     @Override public void onStart(){
+        favoriteTeamCrest.setBackgroundResource(0);
         AsyncDBQuery asyncTask = new AsyncDBQuery(this.getActivity());
         asyncTask.execute();
         super.onStart();
+    }
+
+    @Override public void onResume(){
+        favoriteTeamCrest.setBackgroundResource(0);
+        AsyncDBQuery asyncTask = new AsyncDBQuery(this.getActivity());
+        asyncTask.execute();
+        super.onResume();
     }
 
     @Override
@@ -143,8 +168,12 @@ public class FavoriteTeamFragment extends Fragment {
 
         @Override
         protected void onPostExecute(final Team team){
-            HttpImageRequestTask hirTask = new HttpImageRequestTask(favoriteTeamCrest);
-            hirTask.execute(team.getCrestURI());
+            if(ImageResourceWorker.isBrokenSVG_Crest(team.getCrestURI())){
+                ImageResourceWorker.renderCrestImage(favoriteTeamCrest, team.getCrestURI());
+            } else {
+                HttpImageRequestTask hirTask = new HttpImageRequestTask(favoriteTeamCrest);
+                hirTask.execute(team.getCrestURI());
+            }
             favoriteTeamName.setText(team.getTeamName());
             favoriteTeamGoals.setText(team.getGoals());
             favoriteTeamDraws.setText(team.getDraws());

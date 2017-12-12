@@ -2,6 +2,7 @@ package com.example.android.footyapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.android.footyapp.async.AsyncDbWorker;
 import com.example.android.footyapp.async.HttpImageRequestTask;
+import com.example.android.footyapp.helper.ImageResourceWorker;
 import com.example.android.footyapp.models.Team;
 import com.example.android.footyapp.network.TeamUtils;
 
@@ -145,8 +147,12 @@ public class TeamFragment extends Fragment {
 
         @Override
         protected void onPostExecute(final Team team){
-            HttpImageRequestTask hirTask = new HttpImageRequestTask(teamCrest);
-            hirTask.execute(team.getCrestURI());
+            if(ImageResourceWorker.isBrokenSVG_Crest(team.getCrestURI())){
+                ImageResourceWorker.renderCrestImage(teamCrest, team.getCrestURI());
+            } else {
+                HttpImageRequestTask hirTask = new HttpImageRequestTask(teamCrest);
+                hirTask.execute(team.getCrestURI());
+            }
             name.setText(team.getTeamName());
             wins.setText(team.getWins());
             draws.setText(team.getDraws());

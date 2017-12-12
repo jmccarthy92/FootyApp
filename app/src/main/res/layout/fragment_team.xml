@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:layout_marginTop="17dp"
-        android:text="TextView"
+        android:text=""
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
