@@ -7,6 +7,8 @@ import android.arch.persistence.room.PrimaryKey;
 /**
  * Created by globe_000 on 11/29/2017.
  */
+
+//Database model 3 attributes: unique-id, team_code, and team_name
 @Entity(tableName = "favorite_team")
 public class FavoriteTeam {
 

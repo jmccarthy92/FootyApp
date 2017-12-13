@@ -15,10 +15,10 @@ public class TeamActivity extends AppCompatActivity implements TeamFragment.OnFr
         //getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+//    Had to override onOptions to have the back button reload the league intent with its data.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
-                Log.d("JAMMY","HEREFUCKO DUCK");
                 Intent intent = new Intent(this,LeagueActivity.class);
                 Bundle extras = this.getIntent().getExtras();
                 intent.putExtra("URL_CODE",extras.getString("URL_CODE"));

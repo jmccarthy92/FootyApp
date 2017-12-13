@@ -2,6 +2,8 @@ package com.example.android.footyapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +20,16 @@ import java.util.ArrayList;
  * Created by globe_000 on 12/6/2017.
  */
 
+//Array adapter class to attach to the CompetitionFragments listView
 public class CompetitionAdapter extends ArrayAdapter<Competition> {
 
     private final Context context;
     private final ArrayList<Competition> competitionList;
+    private final int currentOrientation;
 
-    public CompetitionAdapter(Context context, ArrayList<Competition> competitionList){
+    public CompetitionAdapter(Context context, ArrayList<Competition> competitionList, int orientation){
         super(context, R.layout.competition_row, competitionList);
+        this.currentOrientation = orientation;
         this.context = context;
         this.competitionList = competitionList;
     }
@@ -47,6 +52,22 @@ public class CompetitionAdapter extends ArrayAdapter<Competition> {
                v.getContext().startActivity(intent);
            }
         });
+
+//        Handle screen orientation changes here due to the Adapter being encapsulated in
+//        fragment which is encapsulated in an activity.
+//        Little hacky, but it works, so be it.
+        ViewGroup.LayoutParams params = thumbnailImage.getLayoutParams();
+//        rootView.removeAllViews();
+        if(currentOrientation == Configuration.ORIENTATION_LANDSCAPE){
+            thumbnailImage.requestLayout();
+            thumbnailImage.getLayoutParams().height = (int) context.getResources().getDimension(R.dimen.competition_thumb_landscape);
+            thumbnailImage.getLayoutParams().width = (int) context.getResources().getDimension(R.dimen.competition_thumb_landscape);
+
+        } else if (currentOrientation == Configuration.ORIENTATION_PORTRAIT){
+            thumbnailImage.requestLayout();
+            thumbnailImage.getLayoutParams().height = (int) context.getResources().getDimension(R.dimen.competition_thumb_portrait);
+            thumbnailImage.getLayoutParams().width = (int) context.getResources().getDimension(R.dimen.competition_thumb_portrait);
+        }
 
         caption.setText(competitionList.get(position).getLeague());
         currentMatchDay.setText(competitionList.get(position).getCurrentMatchDay());

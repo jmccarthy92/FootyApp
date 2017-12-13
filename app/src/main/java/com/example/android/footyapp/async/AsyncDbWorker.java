@@ -15,6 +15,7 @@ import java.lang.ref.WeakReference;
  * Created by globe_000 on 12/10/2017.
  */
 
+//AsyncTask class used to run DB Queries using Room Data Persistence Library
 public class AsyncDbWorker extends AsyncTask<Team, Void, FavoriteTeam> {
 
     private final WeakReference<Activity> weakActivity;
@@ -35,6 +36,7 @@ public class AsyncDbWorker extends AsyncTask<Team, Void, FavoriteTeam> {
         FavoriteTeam fTeam = new FavoriteTeam();
         fTeam.setTeamCode(params[0].getTeamId());
         fTeam.setTeamName(params[0].getTeamName());
+//        Inserts URL Code to DB for favorite team query on next invocation of the root screen.
         return DBWorker.insertTeam(AppDatabase.getAppDatabase(activity), fTeam);
     }
 

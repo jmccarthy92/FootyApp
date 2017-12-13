@@ -21,7 +21,7 @@ import java.net.URL;
 /**
  * Created by globe_000 on 12/10/2017.
  */
-
+// Class used to Query the image returned by the football-data API and display it in the ImageView passed in
 public class HttpImageRequestTask extends AsyncTask<String, Void, Drawable> {
 
     private ImageView imageView;
@@ -61,6 +61,7 @@ public class HttpImageRequestTask extends AsyncTask<String, Void, Drawable> {
 
     }
 
+    // If the file ends in .png run a different inputStream to decode it into a Drawable
     protected Drawable getDrawableFrom_png_Drawable(String url) throws IOException {
         Bitmap x;
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();

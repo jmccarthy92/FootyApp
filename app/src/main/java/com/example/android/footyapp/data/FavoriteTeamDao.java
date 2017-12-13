@@ -11,6 +11,7 @@ import java.util.List;
  * Created by globe_000 on 11/29/2017.
  */
 
+//Interface to perform queries on SQLite DB using Room Data Persistence lib.
 @Dao
 public interface FavoriteTeamDao {
 

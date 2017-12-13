@@ -9,6 +9,8 @@ import com.example.android.footyapp.R;
  * Created by globe_000 on 12/10/2017.
  */
 
+//Loading images from the URL was allocating to many resources and causing bugs.
+    // This class is used to load in images that were too big or had issues loading.
 public class ImageResourceWorker {
 
     public static boolean isBrokenSVG_Crest(String url){

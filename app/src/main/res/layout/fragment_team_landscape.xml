@@ -1,13 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/team_rel_layout"
+    android:id="@+id/team_rel_layout_landscape"
     tools:context="com.example.android.footyapp.TeamFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
 
     <TextView
         android:id="@+id/team_name"
@@ -21,11 +19,11 @@
 
     <ImageView
         android:id="@+id/team_crest"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/team_name"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/team_name"
+        android:layout_toStartOf="@+id/team_name" />
 
     <TextView
         android:id="@+id/wins_label"
@@ -243,9 +241,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Home"
         android:textColor="#fff"
         android:background="#68a7f4"
+        android:text="Home"
         android:textStyle="bold"
         android:layout_above="@+id/away_goals"
         android:layout_alignRight="@+id/wins_label"
@@ -255,10 +253,10 @@
         android:id="@+id/away_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:background="#f46868"
         android:text="@string/away"
         android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="#f46868"
         android:layout_alignBaseline="@+id/home_label"
         android:layout_alignBottom="@+id/home_label"
         android:layout_alignLeft="@+id/away_goals_label"
@@ -401,11 +399,11 @@
         android:id="@+id/away_losses_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/away_goals_label"
-        android:layout_alignStart="@+id/away_goals_label"
-        android:layout_below="@+id/away_draws_label"
         android:text="Losses:"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_below="@+id/away_draws_label"
+        android:layout_alignLeft="@+id/away_draws_label"
+        android:layout_alignStart="@+id/away_draws_label" />
 
     <TextView
         android:id="@+id/away_losses"
@@ -420,11 +418,12 @@
         android:id="@+id/favorite_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/away_losses_label"
-        android:layout_marginTop="16dp"
-        android:textSize="12sp"
-        android:layout_toEndOf="@+id/played_games"
-        android:layout_toRightOf="@+id/played_games"
-        android:text="@string/favourite" />
+        android:textSize="24sp"
+        android:text="@string/favourite"
+        android:layout_marginRight="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_below="@+id/goals_against"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

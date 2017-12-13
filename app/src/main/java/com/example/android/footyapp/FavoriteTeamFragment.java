@@ -29,7 +29,7 @@ import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.List;
 
-
+//Encapsulated FavoriteTeam , queried from most recent code saved in SQLite storage.
 public class FavoriteTeamFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener = dummyListener;

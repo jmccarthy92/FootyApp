@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="competition_thumb_landscape">50dp</dimen>
+    <dimen name="competition_thumb_portrait">90dp</dimen>
+    <dimen name="team_name_text_size_portrait">4.5sp</dimen>
+    <dimen name="team_name_text_size_landscape">12sp</dimen>
+    <dimen name="team_crest_portrait">120dp</dimen>
+    <dimen name="team_crest_landscape">60dp</dimen>
+</resources>

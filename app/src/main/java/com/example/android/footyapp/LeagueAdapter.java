@@ -7,6 +7,7 @@ package com.example.android.footyapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
@@ -29,13 +30,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+//RecycleView used due to the fact that each league has 20 teams and it would cost
+//more resources to load them all in a listview at once.
 public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder> {
 
     private ArrayList<League> leagueData;
+    private final int orientation;
+    private Context context;
 
-
-    public LeagueAdapter(ArrayList<League> leagueData){
+    public LeagueAdapter(ArrayList<League> leagueData, Context context, int orientation){
         this.leagueData = leagueData;
+        this.orientation = orientation;
+        this.context = context;
         //Log.d("JAMES", leagueData.toString());
 
     }
@@ -92,12 +98,18 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     @Override
     public void onBindViewHolder(LeagueViewHolder viewHolder, int position){
         final League league = leagueData.get(position);
-        Log.d("JAMES", "MADE IT HERE FUCKER");
+
         if(ImageResourceWorker.isBrokenSVG_Crest(league.getCrestURI())){
             ImageResourceWorker.renderCrestImage(viewHolder.teamCrest, league.getCrestURI());
         } else {
             HttpImageRequestTask hirTask = new HttpImageRequestTask(viewHolder.teamCrest);
             hirTask.execute(league.getCrestURI());
+        }
+
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            viewHolder.teamName.setTextSize(context.getResources().getDimension(R.dimen.team_name_text_size_landscape));
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
+            viewHolder.teamName.setTextSize(context.getResources().getDimension(R.dimen.team_name_text_size_portrait));
         }
 
         viewHolder.teamRank.setText(String.valueOf(position + 1));

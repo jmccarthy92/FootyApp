@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.android.footyapp.models.Competition;
 import com.example.android.footyapp.network.Competitionutils;
@@ -24,10 +26,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
+//Competition Fragment class for modularity, and reusability
 public class CompetitionFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener = dummyListener;
+    private FrameLayout frameLayout;
+//    private fiint compOrientation = Activity.getResources().getConfiguration().orientation;
 
     public CompetitionFragment() {
         // Required empty public constructor
@@ -45,7 +49,12 @@ public class CompetitionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_competition, container, false);
+        frameLayout = new FrameLayout(getActivity());
+        inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.fragment_competition, null);
+        frameLayout.addView(view);
+        return frameLayout;
+        //return inflater.inflate(R.layout.fragment_competition, container, false);
     }
 
     @Override
@@ -56,29 +65,16 @@ public class CompetitionFragment extends Fragment {
 
     }
 
-//    public void onConfigurationChanged(Configuration config){
-//        super.onConfigurationChanged(config);
-//        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View newView = inflater.inflate(R.layout.fragment_competition, null);
-//        ViewGroup rootView  = (ViewGroup) getView();
-//        Log.d("JAMMY", "orientation" + String.valueOf(config.orientation) + " " + String.valueOf(Configuration.ORIENTATION_LANDSCAPE));
-//        ImageView competitionCrest = (ImageView) getView().findViewById(R.id.league_image);
-//        ViewGroup.LayoutParams params = competitionCrest.getLayoutParams();
-//        rootView.removeAllViews();
-//        if(config.orientation == Configuration.ORIENTATION_LANDSCAPE){
-//            Log.d("JAMMY", "YO YO");
-//            competitionCrest.requestLayout();
-//            competitionCrest.getLayoutParams().height = 50;
-//            competitionCrest.getLayoutParams().width = 50;
-//
-//        } else if (config.orientation == Configuration.ORIENTATION_PORTRAIT){
-//            competitionCrest.requestLayout();
-//            competitionCrest.getLayoutParams().height = 90;
-//            competitionCrest.getLayoutParams().width = 90;
-//        }
-//        rootView.addView(newView);
-//
-//    }
+    public void onConfigurationChanged(Configuration config){
+        super.onConfigurationChanged(config);
+        //         Had to use this strategy because of the Adapter class being used on a fragment class.
+        frameLayout.removeAllViews();
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View newView = inflater.inflate(R.layout.fragment_competition, null);
+        frameLayout.addView(newView);
+        AsyncCompetitionRequest task = new AsyncCompetitionRequest(this.getActivity());
+        task.execute();
+    }
 
 
     @Override
@@ -106,6 +102,7 @@ public class CompetitionFragment extends Fragment {
 
     }
 
+    //    Async task to Make API Request and fill Views with live footy data
     private class AsyncCompetitionRequest extends AsyncTask<Void, Void, HashMap<String,Competition>> {
 
         private final WeakReference<Activity> weakActivity;
@@ -143,7 +140,7 @@ public class CompetitionFragment extends Fragment {
             }
 
             ArrayList<Competition> competitionArrList = new ArrayList<Competition>(competitionList.values());
-            CompetitionAdapter competitionAdapter = new CompetitionAdapter(activity, competitionArrList);
+            CompetitionAdapter competitionAdapter = new CompetitionAdapter(activity, competitionArrList, getActivity().getResources().getConfiguration().orientation );
             ListView listView = (ListView) fragmentView.findViewById(R.id.competitionDisplay);
             listView.setAdapter(competitionAdapter);
         }

@@ -2,6 +2,8 @@ package com.example.android.footyapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.footyapp.async.AsyncDbWorker;
@@ -24,7 +28,7 @@ import com.example.android.footyapp.network.TeamUtils;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 
-
+//Encapsulates Team Data populating components
 public class TeamFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener = dummyListener;
@@ -35,6 +39,7 @@ public class TeamFragment extends Fragment {
                     homeLosses, awayGoals, awayGoalsAgainst, awayWins, awayDraws, awayLosses;
     private final String urlCode = "URL_CODE";
     private final String teamNameKey = "TEAM_NAME";
+    private FrameLayout frameLayout;
 
 
     public TeamFragment() {
@@ -43,6 +48,7 @@ public class TeamFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+     //   Log.d("JAMES", "soft");
         super.onCreate(savedInstanceState);
     }
 
@@ -50,7 +56,12 @@ public class TeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_team, container, false);
+        //return inflater.inflate(R.layout.fragment_team, container, false);
+        frameLayout = new FrameLayout(getActivity());
+        inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.fragment_team, null);
+        frameLayout.addView(view);
+        return frameLayout;
     }
 
     @Override
@@ -79,6 +90,28 @@ public class TeamFragment extends Fragment {
 
     }
 
+    public void onConfigurationChanged(Configuration config){
+        super.onConfigurationChanged(config);
+
+        frameLayout.removeAllViews();
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //View newView = inflater.inflate(R.layout.fragment_team, null);
+        //frameLayout.addView(newView);
+        if(config.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            View newView = inflater.inflate(R.layout.fragment_team_landscape, null);
+            frameLayout.addView(newView);
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+
+        } else if (config.orientation == Configuration.ORIENTATION_PORTRAIT){
+            View newView = inflater.inflate(R.layout.fragment_team, null);
+            frameLayout.addView(newView);
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+
+        }
+        AsyncTeamRequest asyncTask = new AsyncTeamRequest(this.getActivity());
+        asyncTask.execute();
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -96,6 +129,13 @@ public class TeamFragment extends Fragment {
         AsyncTeamRequest asyncTask = new AsyncTeamRequest(this.getActivity());
         asyncTask.execute();
         super.onStart();
+    }
+
+    @Override
+    public void onResume(){
+        AsyncTeamRequest asyncTask = new AsyncTeamRequest(this.getActivity());
+        asyncTask.execute();
+        super.onResume();
     }
 
     @Override
@@ -147,12 +187,35 @@ public class TeamFragment extends Fragment {
 
         @Override
         protected void onPostExecute(final Team team){
+            teamCrest = (ImageView) getActivity().findViewById(R.id.team_crest);
             if(ImageResourceWorker.isBrokenSVG_Crest(team.getCrestURI())){
                 ImageResourceWorker.renderCrestImage(teamCrest, team.getCrestURI());
             } else {
                 HttpImageRequestTask hirTask = new HttpImageRequestTask(teamCrest);
                 hirTask.execute(team.getCrestURI());
             }
+            // Had to redeclare View components in order to re-populate each on when Orientation changes
+            // between portrait and landscape.
+            favouriteButton = (Button) getActivity().findViewById(R.id.favorite_button);
+            name = (TextView) getActivity().findViewById(R.id.team_name);
+            wins = (TextView) getActivity().findViewById(R.id.wins);
+            draws = (TextView) getActivity().findViewById(R.id.draws);
+            losses = (TextView) getActivity().findViewById(R.id.losses);
+            playedGames = (TextView) getActivity().findViewById(R.id.played_games);
+            points = (TextView) getActivity().findViewById(R.id.points);
+            goals = (TextView) getActivity().findViewById(R.id.goals);
+            goalsAgainst = (TextView) getActivity().findViewById(R.id.goals_against);
+            goalDifference = (TextView) getActivity().findViewById(R.id.goal_difference);
+            homeGoals = (TextView) getActivity().findViewById(R.id.home_goals);
+            homeGoalsAgainst = (TextView) getActivity().findViewById(R.id.home_goals_against);
+            homeWins = (TextView) getActivity().findViewById(R.id.home_wins);
+            homeDraws = (TextView) getActivity().findViewById(R.id.home_draws);
+            homeLosses = (TextView) getActivity().findViewById(R.id.home_losses);
+            awayGoals = (TextView) getActivity().findViewById(R.id.away_goals);
+            awayGoalsAgainst = (TextView) getActivity().findViewById(R.id.away_goals_against);
+            awayWins = (TextView) getActivity().findViewById(R.id.away_wins);
+            awayDraws = (TextView) getActivity().findViewById(R.id.away_draws);
+            awayLosses = (TextView) getActivity().findViewById(R.id.away_losses);
             name.setText(team.getTeamName());
             wins.setText(team.getWins());
             draws.setText(team.getDraws());

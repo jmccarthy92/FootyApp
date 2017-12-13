@@ -4,7 +4,7 @@ package com.example.android.footyapp.models;
 /**
  * Created by globe_000 on 11/29/2017.
  */
-
+//Object Wrapper class for Fixture data.
 public class Fixtures {
 
     private String date;

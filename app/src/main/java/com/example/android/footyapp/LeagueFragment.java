@@ -2,6 +2,7 @@ package com.example.android.footyapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.example.android.footyapp.models.League;
 import com.example.android.footyapp.network.LeagueUtils;
@@ -20,11 +22,11 @@ import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ArrayList;
 
-
+//Encapsulates Leage Data populating components
 public class LeagueFragment extends Fragment {
 
 
-
+    private FrameLayout frameLayout;
 
     private OnFragmentInteractionListener mListener = dummyListener;
 
@@ -44,7 +46,12 @@ public class LeagueFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_league, container, false);
+        frameLayout = new FrameLayout(getActivity());
+        inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.fragment_league, null);
+        frameLayout.addView(view);
+        return frameLayout;
+        //return inflater.inflate(R.layout.fragment_league, container, false);
     }
 
     @Override
@@ -52,6 +59,16 @@ public class LeagueFragment extends Fragment {
         AsyncLeagueRequest task = new AsyncLeagueRequest(this.getActivity());
         task.execute();
         super.onStart();
+    }
+
+    public void onConfigurationChanged(Configuration config){
+        super.onConfigurationChanged(config);
+        frameLayout.removeAllViews();
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View newView = inflater.inflate(R.layout.fragment_league, null);
+        frameLayout.addView(newView);
+        AsyncLeagueRequest task = new AsyncLeagueRequest(this.getActivity());
+        task.execute();
     }
 
 
@@ -126,7 +143,7 @@ public class LeagueFragment extends Fragment {
                 return;
             }
 
-            LeagueAdapter  leagueAdapter = new LeagueAdapter(leagueList);
+            LeagueAdapter  leagueAdapter = new LeagueAdapter(leagueList,getContext(),getActivity().getResources().getConfiguration().orientation);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity,
                                                         LinearLayoutManager.VERTICAL, false);
 

@@ -6,6 +6,7 @@ import java.util.List;
  * Created by globe_000 on 11/29/2017.
  */
 
+//Simple middle man class to write and read from database.
 public class DBWorker {
 
     public static FavoriteTeam insertTeam(final AppDatabase db, FavoriteTeam favoriteTeam){

@@ -9,6 +9,8 @@ import android.content.Context;
  * Created by globe_000 on 11/29/2017.
  */
 
+//Database singleton instance
+    // Used to store URL codes for the favorite component.
 @Database(entities = {FavoriteTeam.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
